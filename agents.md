@@ -1,0 +1,1 @@
+- when 'script' is mentioned, create a script in scripts/

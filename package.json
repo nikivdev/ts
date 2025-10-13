@@ -21,6 +21,8 @@
     "@libsql/client": "^0.15.9",
     "@nikiv/ts-utils": "workspace:*",
     "@nozbe/microfuzz": "^1.0.0",
+    "@optique/core": "^0.6.1",
+    "@optique/run": "^0.6.1",
     "@orama/orama": "^3.1.10",
     "@swan-io/boxed": "^3.2.0",
     "@types/node": "^24.0.12",

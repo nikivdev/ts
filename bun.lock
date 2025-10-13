@@ -12,6 +12,8 @@
         "@libsql/client": "^0.15.9",
         "@nikiv/ts-utils": "workspace:*",
         "@nozbe/microfuzz": "^1.0.0",
+        "@optique/core": "^0.6.1",
+        "@optique/run": "^0.6.1",
         "@orama/orama": "^3.1.10",
         "@swan-io/boxed": "^3.2.0",
         "@types/node": "^24.0.12",
@@ -388,6 +390,10 @@
     "@opentelemetry/api": ["@opentelemetry/api@1.9.0", "", {}, "sha512-3giAOQvZiH5F9bMlMiv8+GSPMeqg0dbaeo58/0SlA9sxSqZhnUtxzX9/2FzyhS9sWQf5S0GJE0AKBrFqjpeYcg=="],
 
     "@opentelemetry/semantic-conventions": ["@opentelemetry/semantic-conventions@1.34.0", "", {}, "sha512-aKcOkyrorBGlajjRdVoJWHTxfxO1vCNHLJVlSDaRHDIdjU+pX8IYQPvPDkYiujKLbRnWU+1TBwEt0QRgSm4SGA=="],
+
+    "@optique/core": ["@optique/core@0.6.1", "", {}, "sha512-e3J5zCL9aBAheZkLgYUoeAt1wKSkFbSn0+h0kB4VYabOGUnesVuSxZe00BY4jLnXr36HqaSf6ZTJi8bxbLH0Zg=="],
+
+    "@optique/run": ["@optique/run@0.6.1", "", { "dependencies": { "@optique/core": "0.6.1" } }, "sha512-P3E5ZAAwhAg8RYp2M4MPtwUr1wdZD7/IxHGKwW+Ie8eFbmfXnfvrygyqh5At0mQXVxbzKYlVrfl1vdoKVoxD7Q=="],
 
     "@orama/orama": ["@orama/orama@3.1.10", "", {}, "sha512-YNou2xlCIgPhMDe1TBEmp1wsAPFCL7Fd11rct7YfXYYiNAVBNL2rWoEydJRDJFVmqgt0l6mzSg35sDQ3i8yfKQ=="],
 
