@@ -12,7 +12,7 @@ Run `task` to see all possible commands.
 
 `flow` is a CLI as a dump of various commands written in TS that are useful to me. See [cli/flow](cli/flow) for its code/docs.
 
-Run `task deploy` to install `flow-ts` into PATH. It also puts `fj` command in path (my own personal shorthand, but you can change it)
+Run `task deploy` to install `flow-ts` into PATH. It also puts `fj` command in path (my own personal shorthand, but you can change it).
 
 ## Contributing
 
