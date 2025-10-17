@@ -24,7 +24,7 @@
   "type": "module",
   "main": "./mod.ts",
   "types": "./mod.ts",
-  "repository": "github:nikitavoloboev/ts-utils",
+  "repository": "github:nikivdev/ts-utils",
   "keywords": [
     "typescript",
     "utilities",

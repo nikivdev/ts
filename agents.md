@@ -1,1 +1,1 @@
-- when 'script' is mentioned, create a script in scripts/
+- when `script some-name` is written, create a script in scripts/. use `@optique` to do arg parsing
