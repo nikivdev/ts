@@ -22,7 +22,10 @@ async function main() {
   const binDirectory = path.join(os.homedir(), "bin")
   const binaryNameEnv = process.env.FLOW_TS_BIN_NAME?.trim()
   const binaryName = binaryNameEnv && binaryNameEnv.length > 0 ? binaryNameEnv : "flow-ts"
-  const targetPath = path.join(binDirectory, binaryName)
+  const aliasEnv = process.env.FLOW_TS_BIN_ALIASES?.split(":")
+    .map((name) => name.trim())
+    .filter((name) => name.length > 0) ?? []
+  const namesToInstall = Array.from(new Set([binaryName, "fj", ...aliasEnv]))
 
   await fs.mkdir(binDirectory, { recursive: true })
 
@@ -31,10 +34,12 @@ async function main() {
 await import(${JSON.stringify(entryUrl)});
 `
 
-  await fs.writeFile(targetPath, scriptContent, { mode: 0o755 })
-  await fs.chmod(targetPath, 0o755)
-
-  console.log(`Installed CLI to ${targetPath}`)
+  for (const name of namesToInstall) {
+    const targetPath = path.join(binDirectory, name)
+    await fs.writeFile(targetPath, scriptContent, { mode: 0o755 })
+    await fs.chmod(targetPath, 0o755)
+    console.log(`Installed CLI to ${targetPath}`)
+  }
 }
 
 main().catch((error) => {
