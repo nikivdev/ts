@@ -30,3 +30,4 @@ private
 
 cli/gen
 packages/1focus
+run.ts

@@ -61,7 +61,7 @@ tasks:
         set -euo pipefail
         task flow -- {{.CLI_ARGS}}
 
-  deploy:
+  publish:
     desc: Install the Flow CLI script to {{.bin_dir}}/{{.bin_name}}.
     silent: true
     cmds:
@@ -78,3 +78,11 @@ tasks:
         if [ -f "{{.bin_dir}}/{{.bin_name}}" ]; then
           chmod 755 "{{.bin_dir}}/{{.bin_name}}"
         fi
+
+  deploy:
+    desc: Alias for `task publish`.
+    silent: true
+    cmds:
+      - |
+        set -euo pipefail
+        task publish -- {{.CLI_ARGS}}
