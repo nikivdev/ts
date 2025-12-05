@@ -1,0 +1,11 @@
+{
+	"name": "@ts/try-reatom",
+	"version": "0.0.0",
+	"type": "module",
+	"main": "./reatom.ts",
+	"module": "./reatom.ts",
+	"types": "./reatom.ts",
+	"exports": {
+		".": "./reatom.ts"
+	}
+}

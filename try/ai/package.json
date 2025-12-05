@@ -1,0 +1,11 @@
+{
+	"name": "@ts/try-ai",
+	"version": "0.0.0",
+	"type": "module",
+	"main": "./ai.ts",
+	"module": "./ai.ts",
+	"types": "./ai.ts",
+	"exports": {
+		".": "./ai.ts"
+	}
+}

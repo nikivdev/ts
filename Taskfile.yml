@@ -1,0 +1,88 @@
+version: '3'
+
+vars:
+  bin_dir: "{{.HOME}}/bin"
+  bin_name: "flow-ts"
+
+tasks:
+  default:
+    desc: List available tasks.
+    silent: true
+    cmds:
+      - task --list
+
+  setup:
+    desc: Ensure Bun is installed and install Flow CLI dependencies.
+    silent: true
+    cmds:
+      - |
+        set -euo pipefail
+        if ! command -v bun >/dev/null 2>&1; then
+          echo "Bun runtime 'bun' not found in PATH."
+          echo "Install it from https://bun.sh/docs/installation"
+          exit 1
+        fi
+        bun --version >/dev/null
+        repo_root="$PWD"
+        for project_dir in "$repo_root" "$repo_root/cli/flow"; do
+          if [ -f "$project_dir/package.json" ]; then
+            pushd "$project_dir" >/dev/null
+            if ! bun install >/dev/null 2>&1; then
+              echo "Warning: unable to install dependencies in $project_dir; try again once network access is available."
+            fi
+            popd >/dev/null
+          fi
+        done
+        echo "✔️ setup complete"
+
+  flow:
+    desc: Run the Flow CLI (passes CLI args through).
+    silent: true
+    cmds:
+      - |
+        set -euo pipefail
+        pushd cli/flow >/dev/null
+        bun ./src/main.ts{{if .CLI_ARGS}} {{.CLI_ARGS}}{{end}}
+        popd >/dev/null
+
+  dev:
+    desc: Alias for `task flow`.
+    silent: true
+    cmds:
+      - |
+        set -euo pipefail
+        task flow -- {{.CLI_ARGS}}
+
+  run:
+    desc: Alias for `task flow`.
+    silent: true
+    cmds:
+      - |
+        set -euo pipefail
+        task flow -- {{.CLI_ARGS}}
+
+  publish:
+    desc: Install the Flow CLI script to {{.bin_dir}}/{{.bin_name}}.
+    silent: true
+    cmds:
+      - |
+        set -euo pipefail
+        repo_root="$PWD"
+        mkdir -p "{{.bin_dir}}"
+        pushd cli/flow >/dev/null
+        if ! bun install >/dev/null 2>&1; then
+          echo "Warning: unable to install dependencies; try again once network access is available."
+        fi
+        FLOW_TS_BIN_NAME="{{.bin_name}}" bun run publish
+        popd >/dev/null
+        if [ -f "{{.bin_dir}}/{{.bin_name}}" ]; then
+          chmod 755 "{{.bin_dir}}/{{.bin_name}}"
+        fi
+
+  deploy:
+    desc: Alias for `task publish`.
+    silent: true
+    cmds:
+      - |
+        set -euo pipefail
+        task publish -- {{.CLI_ARGS}}

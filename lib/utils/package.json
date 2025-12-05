@@ -1,0 +1,35 @@
+{
+	"name": "@nikiv/ts-utils",
+	"description": "Utils of all kind",
+	"version": "0.1.7",
+	"scripts": {
+		"dev": "bun s",
+		"s": "bun --watch scripts/run.ts",
+		"sr": "bun --watch scripts/p-run.ts",
+		"jsr:publish": "bunx jsr publish"
+	},
+	"dependencies": {
+		"bun": "^1.2.10",
+		"clipboardy": "^4.0.0",
+		"osascript-tag": "^0.1.2",
+		"ufo": "^1.6.1"
+	},
+	"devDependencies": {
+		"@types/bun": "^1.2.10",
+		"watcher": "^2.3.1"
+	},
+	"prettier": {
+		"semi": false
+	},
+	"type": "module",
+	"main": "./mod.ts",
+	"types": "./mod.ts",
+	"repository": "github:nikivdev/ts-utils",
+	"keywords": [
+		"typescript",
+		"utilities",
+		"bun"
+	],
+	"author": "nikiv.dev",
+	"license": "MIT"
+}

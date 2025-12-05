@@ -1,0 +1,5 @@
+{
+	"name": "@nikiv/utils",
+	"version": "0.1.7",
+	"exports": "./mod.ts"
+}

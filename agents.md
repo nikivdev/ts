@@ -1,0 +1,1 @@
+- when `script some-name` is written, create a script in scripts/. use `@optique` to do arg parsing

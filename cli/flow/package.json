@@ -1,0 +1,25 @@
+{
+	"name": "1f",
+	"module": "index.ts",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"publish": "bun publish.ts"
+	},
+	"bin": {
+		"ts": "./bin/ts"
+	},
+	"devDependencies": {
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"prettier": {
+		"semi": false
+	},
+	"dependencies": {
+		"@optique/core": "^0.5.0",
+		"@optique/run": "^0.5.0"
+	}
+}
