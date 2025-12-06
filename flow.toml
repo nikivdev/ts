@@ -1,0 +1,23 @@
+version = 1
+name = "ts"
+
+[deps]
+fast = "github.com/1focus-ai/fast"
+
+
+[[tasks]]
+name = "setup"
+command = ""
+description = "Project setup (fill me)"
+
+[[tasks]]
+name = "dev"
+command = ""
+description = "Start dev server (fill me)"
+
+[[tasks]]
+name = "commit"
+command = "fast commitPush"
+description = "Commit with AI"
+dependencies = ["fast"]
+delegate_to_hub = true

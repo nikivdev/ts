@@ -1,0 +1,13 @@
+[[tasks]]
+name = "setup"
+command = "bun i"
+
+[[tasks]]
+name = "commits"
+command = "bun src/index.ts $@"
+description = "Fetch GitHub commits (usage: flow commits <username> <date|today>)"
+
+[[tasks]]
+name = "today"
+command = "bun src/index.ts $1 today"
+description = "Fetch today's commits (usage: flow today <username>)"

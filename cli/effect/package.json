@@ -1,0 +1,17 @@
+{
+  "name": "effect-github-commits",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "bun run src/index.ts"
+  },
+  "dependencies": {
+    "@effect/cli": "^0.72.1",
+    "@effect/platform": "^0.93.6",
+    "@effect/platform-node": "^0.103.0",
+    "effect": "^3.19.8"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}
