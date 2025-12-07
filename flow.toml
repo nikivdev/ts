@@ -4,16 +4,13 @@ name = "ts"
 [deps]
 fast = "github.com/1focus-ai/fast"
 
-
 [[tasks]]
 name = "setup"
-command = ""
-description = "Project setup (fill me)"
+command = "bun i"
 
 [[tasks]]
 name = "dev"
-command = ""
-description = "Start dev server (fill me)"
+command = "bun --watch run.ts"
 
 [[tasks]]
 name = "commit"

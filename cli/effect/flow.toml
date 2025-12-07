@@ -5,9 +5,24 @@ command = "bun i"
 [[tasks]]
 name = "commits"
 command = "bun src/index.ts $@"
-description = "Fetch GitHub commits (usage: flow commits <username> <date|today>)"
+description = "Fetch public GitHub commits (usage: flow commits <username> <date|today>)"
 
 [[tasks]]
 name = "today"
 command = "bun src/index.ts $1 today"
-description = "Fetch today's commits (usage: flow today <username>)"
+description = "Fetch today's public commits (usage: flow today <username>)"
+
+[[tasks]]
+name = "private"
+command = "bun src/index.ts --private $@"
+description = "Fetch commits incl. private (usage: flow private <username> <date|today>)"
+
+[[tasks]]
+name = "private-today"
+command = "bun src/index.ts --private $1 today"
+description = "Fetch today's commits incl. private (usage: flow private-today <username>)"
+
+[[tasks]]
+name = "workflow"
+command = "bun lib/test-workflow.ts"
+description = "Test durable-effect workflow patterns"

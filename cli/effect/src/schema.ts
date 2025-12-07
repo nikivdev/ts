@@ -32,3 +32,26 @@ export class CommitSearchResult extends Schema.Class<CommitSearchResult>("Commit
     })
   ),
 }) {}
+
+// GitHub Events API schema for PushEvent
+export const PushEventPayload = Schema.Struct({
+  commits: Schema.Array(
+    Schema.Struct({
+      sha: Schema.String,
+      message: Schema.String,
+      url: Schema.String,
+    })
+  ),
+})
+
+export const GitHubEvent = Schema.Struct({
+  id: Schema.String,
+  type: Schema.String,
+  repo: Schema.Struct({
+    name: Schema.String,
+  }),
+  created_at: Schema.String,
+  payload: Schema.optional(Schema.Unknown),
+})
+
+export type GitHubEvent = typeof GitHubEvent.Type
