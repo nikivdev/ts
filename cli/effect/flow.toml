@@ -26,3 +26,8 @@ description = "Fetch today's commits incl. private (usage: flow private-today <u
 name = "workflow"
 command = "bun lib/test-workflow.ts"
 description = "Test durable-effect workflow patterns"
+
+[[tasks]]
+name = "r2"
+command = "bun lib/cloudflare/test-r2.ts"
+description = "Test R2 abstraction (requires R2_* env vars)"
