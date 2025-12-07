@@ -1,20 +1,6 @@
 version = 1
 name = "ts"
 
-[deps]
-fast = "github.com/1focus-ai/fast"
-
 [[tasks]]
 name = "setup"
 command = "bun i"
-
-[[tasks]]
-name = "dev"
-command = "bun --watch run.ts"
-
-[[tasks]]
-name = "commit"
-command = "fast commitPush"
-description = "Commit with AI"
-dependencies = ["fast"]
-delegate_to_hub = true
