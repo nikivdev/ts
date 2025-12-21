@@ -33,3 +33,4 @@ packages/1focus
 run.ts
 cli/fast
 lib/1focus
+.ai/

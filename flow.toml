@@ -4,3 +4,7 @@ name = "ts"
 [[tasks]]
 name = "setup"
 command = "bun i"
+
+[[tasks]]
+name = "run-ts"
+command = "bun run.ts"
