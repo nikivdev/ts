@@ -38,6 +38,7 @@
 		"ai": "^5.0.78",
 		"alchemy": "^0.76.1",
 		"arktype": "^2.1.23",
+		"better-result": "^2.3.0",
 		"chatgpt": "^5.2.5",
 		"citty": "^0.1.6",
 		"clipboardy": "^5.0.0",

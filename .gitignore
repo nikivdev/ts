@@ -36,3 +36,6 @@ lib/1focus
 .ai/
 test.md
 .ai/internal/
+
+# opensrc - source code for packages
+opensrc/

@@ -1,6 +1,5 @@
 {
   "lockfileVersion": 1,
-  "configVersion": 0,
   "workspaces": {
     "": {
       "name": "ts",
@@ -30,6 +29,7 @@
         "ai": "^5.0.78",
         "alchemy": "^0.76.1",
         "arktype": "^2.1.23",
+        "better-result": "^2.3.0",
         "chatgpt": "^5.2.5",
         "citty": "^0.1.6",
         "clipboardy": "^5.0.0",
@@ -776,6 +776,8 @@
     "base64-js": ["base64-js@1.5.1", "", {}, "sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA=="],
 
     "before-after-hook": ["before-after-hook@3.0.2", "", {}, "sha512-Nik3Sc0ncrMK4UUdXQmAnRtzmNQTAAXmXIopizwZ1W1t8QmfJj+zL4OA2I7XPTPW5z5TDqv4hRo/JzouDJnX3A=="],
+
+    "better-result": ["better-result@2.3.0", "", { "dependencies": { "@clack/prompts": "^0.11.0" }, "bin": { "better-result": "bin/cli.mjs" } }, "sha512-CqTRSRU41PbMlzsnXfcU1bmyxxHUJSIBjyM3EagGbqclxBdy7Om+FrY9x3ix9XR7WdsHIyZhBp67eY8m8JCiNQ=="],
 
     "bignumber.js": ["bignumber.js@9.3.0", "", {}, "sha512-EM7aMFTXbptt/wZdMlBv2t8IViwQL+h6SLHosp8Yf0dqJMTnY6iL32opnAB6kAdL0SZPuvcAzFr31o0c/R3/RA=="],
 
