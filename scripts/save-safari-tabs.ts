@@ -14,9 +14,9 @@ type LocalTab = Tab & {
 	index: number;
 };
 
-async function fetchLocalTabs(
-	appIdentifier: "com.apple.Safari",
-): Promise<LocalTab[]> {
+type SafariApp = "com.apple.Safari" | "com.apple.SafariTechnologyPreview"
+
+async function fetchLocalTabs(appIdentifier: SafariApp): Promise<LocalTab[]> {
 	return executeJxa(`
     const safari = Application("${appIdentifier}");
     const tabs = [];
@@ -39,32 +39,48 @@ async function fetchLocalTabs(
 `);
 }
 
-const tabs = await fetchLocalTabs("com.apple.Safari");
-const links = tabs.map((tab) => {
-	return {
+async function saveTabs(appIdentifier: SafariApp, suffix: string) {
+	const tabs = await fetchLocalTabs(appIdentifier)
+	const links = tabs.map((tab) => ({
 		title: tab.title,
 		url: tab.url,
-	};
-});
-const folderPath = path.join(os.homedir(), "/data/safari-sessions");
-const date = new Date();
-const currentDateStr = `${date.getFullYear()}-${String(
-	date.getMonth() + 1,
-).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
-const filePath = path.join(folderPath + `/${currentDateStr}-safari-tabs.json`);
-if (fs.existsSync(filePath)) {
-	let number = 1;
-	let newPath = filePath;
-	while (fs.existsSync(newPath)) {
-		newPath = path.join(
-			folderPath,
-			`/${currentDateStr}-safari-tabs-${number}.json`,
-		);
-		number++;
+	}))
+
+	if (links.length === 0) return
+
+	const folderPath = path.join(os.homedir(), "/data/safari-sessions")
+	const date = new Date()
+	const currentDateStr = `${date.getFullYear()}-${String(
+		date.getMonth() + 1,
+	).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`
+
+	const baseFileName = `${currentDateStr}-${suffix}`
+	let filePath = path.join(folderPath, `${baseFileName}.json`)
+
+	if (fs.existsSync(filePath)) {
+		let number = 1
+		while (fs.existsSync(filePath)) {
+			filePath = path.join(folderPath, `${baseFileName}-${number}.json`)
+			number++
+		}
 	}
-	Bun.write(newPath, JSON.stringify(links));
+
+	await Bun.write(filePath, JSON.stringify(links))
+	console.log(`Saved ${links.length} tabs to ${filePath}`)
+}
+
+const arg = process.argv[2]
+
+if (arg === "tp" || arg === "preview") {
+	await saveTabs("com.apple.SafariTechnologyPreview", "safari-tp-tabs")
+} else if (arg === "safari") {
+	await saveTabs("com.apple.Safari", "safari-tabs")
 } else {
-	Bun.write(filePath, JSON.stringify(links));
+	// Default: save both
+	await Promise.all([
+		saveTabs("com.apple.Safari", "safari-tabs"),
+		saveTabs("com.apple.SafariTechnologyPreview", "safari-tp-tabs"),
+	])
 }
 
 // const file = Bun.file(file_path)

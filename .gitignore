@@ -34,3 +34,5 @@ run.ts
 cli/fast
 lib/1focus
 .ai/
+test.md
+.ai/internal/
