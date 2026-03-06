@@ -39,3 +39,15 @@ test.md
 
 # opensrc - source code for packages
 opensrc/
+
+# flow
+.ai/internal/
+.ai/web/
+.ai/skills/
+.claude/
+.codex/
+.flox/
+
+.ai/todos/*.bike
+
+.ai/review-log.jsonl

@@ -48,7 +48,7 @@ async function saveTabs(appIdentifier: SafariApp, suffix: string) {
 
 	if (links.length === 0) return
 
-	const folderPath = path.join(os.homedir(), "/data/safari-sessions")
+	const folderPath = path.join(os.homedir(), "docs/sessions/safari")
 	const date = new Date()
 	const currentDateStr = `${date.getFullYear()}-${String(
 		date.getMonth() + 1,

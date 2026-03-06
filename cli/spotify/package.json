@@ -1,0 +1,24 @@
+{
+  "name": "spotify-cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "spotify": "./dist/main.js"
+  },
+  "scripts": {
+    "start": "bun run src/main.ts",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@effect/cli": "^0.72.1",
+    "@effect/platform": "^0.93.6",
+    "@effect/platform-node": "^0.103.0",
+    "@spotify/web-api-ts-sdk": "^1.2.0",
+    "effect": "^3.19.9"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.3",
+    "typescript": "^5.7.0"
+  }
+}

@@ -1,0 +1,58 @@
+version = 1
+name = "spotify-cli"
+
+[flow]
+primary_task = "start"
+
+[[tasks]]
+name = "start"
+command = "bun run src/main.ts"
+description = "Run the Spotify CLI"
+
+[[tasks]]
+name = "help"
+command = "bun run src/main.ts --help"
+description = "Show CLI help"
+
+[[tasks]]
+name = "now"
+command = "bun run src/main.ts now"
+description = "Show currently playing track"
+
+[[tasks]]
+name = "search"
+command = "bun run src/main.ts search"
+description = "Search Spotify (pass query as arg)"
+
+[[tasks]]
+name = "play"
+command = "bun run src/main.ts play"
+description = "Play or resume playback"
+
+[[tasks]]
+name = "pause"
+command = "bun run src/main.ts pause"
+description = "Pause playback"
+
+[[tasks]]
+name = "devices"
+command = "bun run src/main.ts devices"
+description = "List available devices"
+
+[[tasks]]
+name = "deploy-spotify"
+command = "bun build src/main.ts --compile --outfile spotify && mv spotify ~/.local/bin/spotify"
+description = "Build and install spotify CLI to ~/.local/bin"
+
+[storage]
+provider = "myflow.sh"
+
+[[storage.envs]]
+name = "local"
+description = "Spotify API credentials"
+variables = [
+  { key = "SPOTIFY_CLIENT_ID" },
+  { key = "SPOTIFY_CLIENT_SECRET" },
+  { key = "SPOTIFY_ACCESS_TOKEN" },
+  { key = "SPOTIFY_REFRESH_TOKEN", default = "" },
+]
