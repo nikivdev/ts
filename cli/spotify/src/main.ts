@@ -462,7 +462,8 @@ const playlistsCommand = Command.make(
 
       yield* Console.log(bold("Your playlists:\n"))
       for (const playlist of playlists) {
-        yield* Console.log(`${playlist.name} ${dim(`(${playlist.tracks.total} tracks)`)}`)
+        const trackCount = playlist.tracks?.total ?? 0
+        yield* Console.log(`${playlist.name} ${dim(`(${trackCount} tracks)`)}`)
         yield* Console.log(`  ${dim(playlist.uri)}`)
       }
     })

@@ -4,11 +4,13 @@ import { SpotifyApi } from "@spotify/web-api-ts-sdk"
 import type {
   Track,
   SimplifiedAlbum,
+  Album,
   Artist,
   SimplifiedPlaylist,
   PlaybackState,
   Device,
-  Page,
+  Market,
+  MaxInt,
 } from "@spotify/web-api-ts-sdk"
 
 export class SpotifyError extends TaggedError("SpotifyError")<{
@@ -79,13 +81,13 @@ export class Spotify extends Context.Tag("Spotify")<
 
     readonly getAlbum: (
       id: string
-    ) => Effect.Effect<SimplifiedAlbum & { tracks: Page<Track> }, SpotifyError>
+    ) => Effect.Effect<Album, SpotifyError>
 
     readonly getArtist: (id: string) => Effect.Effect<Artist, SpotifyError>
 
     readonly getArtistTopTracks: (
       id: string,
-      market?: string
+      market?: Market
     ) => Effect.Effect<Track[], SpotifyError>
 
     readonly getRecommendations: (options: {
@@ -139,17 +141,23 @@ const wrapSpotifyCall = <T>(
       }),
   })
 
+const toMax50 = (value: number): MaxInt<50> =>
+  Math.max(0, Math.min(50, Math.trunc(value))) as MaxInt<50>
+
 export const makeSpotify = (api: SpotifyApi) =>
   Spotify.of({
     search: (query, types, limit = 20) =>
       wrapSpotifyCall(
         async () => {
-          const result = await api.search(query, types, undefined, limit)
+          const result = await api.search(query, types, undefined, toMax50(limit))
           return {
             tracks: result.tracks?.items ?? [],
             albums: result.albums?.items ?? [],
             artists: result.artists?.items ?? [],
-            playlists: result.playlists?.items ?? [],
+            playlists: (result.playlists?.items ?? []).map((playlist) => ({
+              ...playlist,
+              tracks: null,
+            })),
           }
         },
         `Failed to search for "${query}"`
@@ -257,7 +265,7 @@ export const makeSpotify = (api: SpotifyApi) =>
 
     getAlbum: (id) =>
       wrapSpotifyCall(
-        () => api.albums.get(id) as Promise<SimplifiedAlbum & { tracks: Page<Track> }>,
+        () => api.albums.get(id),
         `Failed to get album ${id}`
       ),
 
@@ -265,10 +273,10 @@ export const makeSpotify = (api: SpotifyApi) =>
       wrapSpotifyCall(() => api.artists.get(id), `Failed to get artist ${id}`),
 
     getArtistTopTracks: (id, market = "US") =>
-      wrapSpotifyCall(
-        () => api.artists.topTracks(id, market),
-        `Failed to get top tracks for artist ${id}`
-      ),
+      wrapSpotifyCall(async () => {
+        const result = await api.artists.topTracks(id, market)
+        return result.tracks
+      }, `Failed to get top tracks for artist ${id}`),
 
     getRecommendations: (options) =>
       wrapSpotifyCall(async () => {
@@ -298,7 +306,7 @@ export const makeSpotify = (api: SpotifyApi) =>
 
     getUserPlaylists: (limit = 50) =>
       wrapSpotifyCall(async () => {
-        const result = await api.currentUser.playlists.playlists(limit)
+        const result = await api.currentUser.playlists.playlists(toMax50(limit))
         return result.items
       }, "Failed to get user playlists"),
 
